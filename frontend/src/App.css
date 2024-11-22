@@ -1,0 +1,12 @@
+.header {
+  color: blue;
+  text-align: center;
+  font-size: 36px;
+}
+
+.image-style {
+  width: 300px;
+  height: auto;
+  justify-content: center;
+  border-radius: 10px;
+}

@@ -1,0 +1,36 @@
+/* Apply the image as the background of the page */
+.home-container {
+    display: flex;               /* Use flexbox for centering */
+    flex-direction: column;      /* Stack items vertically */
+    justify-content: center;     /* Center items vertically */
+    align-items: center;         /* Center items horizontally */
+    height: 100vh;               /* Full height of the viewport */
+    position: relative;          /* Position context */
+    background-image: url('./Tennis.jpeg');  /* Set the background image */
+    background-size: cover;      /* Make sure the image covers the entire viewport */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;/* Prevent image from repeating */
+  }
+  
+  
+  /* Additional styles */
+  .title {
+    font-size: 36px;
+    font-weight: 150;
+    text-align: center;
+    color: white;   /* Set text color to white for contrast */
+    margin-bottom: 20px;
+  }
+  
+  
+  .cta-section {
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: center;
+    color: white;   /* Set text color to white for contrast */
+  }
+  
+  .highlight {
+    color: #ff6347;
+  }
+  
