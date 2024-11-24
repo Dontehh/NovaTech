@@ -31,3 +31,29 @@ function Header() {
 }
 
 export default Header;
+
+
+// import React from "react";
+// import "./header.css";
+
+// const Header = () => {
+//   return (
+//     <header className="header">
+//       <div className="logo">NovaFit</div>
+//       <nav>
+//         <ul>
+//           <li><a href="#spots">Basketball</a></li>
+//           <li><a href="#spots">Futsal</a></li>
+//           <li><a href="#spots">Football</a></li>
+//           <li><a href="#spots">Fitness</a></li>
+//         </ul>
+//       </nav>
+//       <div className="auth-buttons">
+//         <button className="login">Log In</button>
+//         <button className="signup">Sign Up</button>
+//       </div>
+//     </header>
+//   );
+// };
+
+// export default Header;

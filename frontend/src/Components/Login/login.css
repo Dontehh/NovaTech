@@ -1,5 +1,5 @@
 /* Basic styling for the login page */
-.login-container {
+/* .login-container {
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
@@ -55,5 +55,53 @@
     color: red;
     font-size: 14px;
     margin-bottom: 10px;
+  } */
+  
+
+  .login-container {
+    text-align: center;
+    /* background-image: url("../Home/Tennis.jpeg");
+    background-size: cover; /* Makes the image cover the entire section */
+    /* background-position: center; /* Centers the image */
+    /* background-repeat: no-repeat; /* Prevents the image from repeating */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
   
+  h2 {
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 10px;
+    max-width: 400px;
+    margin: 50px auto;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  a {
+    color: #4CAF50;
+    text-decoration: none;
+  }

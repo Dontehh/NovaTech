@@ -21,19 +21,20 @@
 /* Style for the search bar */
 .header .search-bar {
   flex-grow: 0;
-  margin-right: 5%;
+  margin-right: 2%;
   text-align: center;
-  width: 100px;           /* Set a specific width to make it smaller */
+  width: 200px;           /* Set a specific width to make it smaller */
   padding: 5px 10px;      /* Adjust padding to reduce the size */
   font-size: 14px;        /* Reduce the font size to make the text smaller */
   text-align: center;
+  background-color:rgba(255, 255, 255, 0.249);
 }
 
 
 .header .search-bar input {
   padding: 0px 0px;   /* Padding for the input field */
-  width: 50%;          /* Width of the search bar */
-  border: 1px solid transparent; /* Light border */
+  width: 100%;          /* Width of the search bar */
+  border: 0px transparent; /* Light border */
   border-radius: 0px;  /* Rounded corners */
   background-color: transparent;
   font-size: 16px;     /* Font size for readability */
