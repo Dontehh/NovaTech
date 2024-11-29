@@ -1,0 +1,117 @@
+/* Spots Section Styles */
+.spots {
+    margin-top: 1%;
+    padding: 0 3rem;
+  }
+  
+.spots-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+  
+/* Style the navbar container */
+.navbar {
+  display: flex;
+  justify-content: left; /* Center the buttons horizontally */
+  align-items: center; /* Vertically align the buttons */
+  flex-direction: row;
+}
+
+/* Style for the button container */
+.navbar-nav {
+  flex-direction: row;
+  display: flex; /* Arrange buttons in a row */
+  gap: 15px; /* Add spacing between buttons */
+}
+
+/* Style for each button */
+.navbar .nav-btn {
+  background-color: transparent; /* No background color initially */
+  color: #333; /* Default text color */
+  padding: 5px 10px; /* Add padding for better sizing */
+  border-radius: 5px; /* Rounded corners for the button */
+  transition: all 0.3s ease; 
+  text-align: center; /* Center the text inside the button */
+}
+
+/* Hover effect for buttons */
+.navbar .nav-btn:hover {
+  background-color: #f3e9b2b4; 
+}
+
+/* Styling for "See All" button */
+.navbar .nav-btn:last-child {
+  font-weight: bold; 
+  margin-left: 100%;
+  text-wrap: 0;
+}
+
+  /* Container for all spots */
+.spots-container {
+  margin-top: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adds space between cards */
+  justify-content: center; /* Centers the cards */
+}
+
+/* Individual card styling */
+.spot-card {
+  width: 300px; /* Bootstrap standard card width */
+  border: 1px solid #ddd; /* Optional: Adds a border */
+  border-radius: 8px; /* Optional: Rounds card corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow */
+  overflow: hidden; /* Ensures content stays within card bounds */
+}
+
+.spot-card img {
+  width: 100%; /* Ensures the image spans full card width */
+  height: auto; /* Maintains aspect ratio */
+}
+
+.spot-card .card-body {
+  padding: 1rem;
+}
+
+.spot-card .card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.spot-card .card-text {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.spot-card .btn {
+  background-color: #1cc00d; /* Primary button color */
+  color: white;
+  text-align: center;
+  display: inline-block;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.spot-card .btn:hover {
+  background-color: #067800; /* Darker shade on hover */
+}
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .spots-section {
+      padding: 0 1.5rem;
+    }
+  
+    .spots-container {
+      grid-template-columns: 1fr;
+    }
+  
+    .spot-card {
+      max-width: 100%;
+    }
+  }
+  

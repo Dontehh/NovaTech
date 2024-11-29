@@ -1,0 +1,54 @@
+/* Style for the header */
+.header {
+  position: fixed;      /* Fixes the header at the top of the page */
+  top: 0;               /* Position it at the top */
+  left: 0;              /* Position it at the left */
+  width: 100%;          /* Make it span the full width of the page */
+  display: flex;        /* Use flexbox for layout */
+  justify-content: space-between; /* Space out items (left, center, right) */
+  align-items: center;  /* Vertically align items */
+  /* background-color: #333; /* Dark background for better contrast */
+  padding: 10px 20px;   /* Padding for spacing around the content */
+  z-index: 1000;        /* Ensures the header stays above other content */
+  color: white;         /* Text color */
+}
+/* Container for the left-side buttons */
+/* .header .right-buttons {
+  display: flex;       /* Flexbox for horizontal layout */
+  /*gap: 5px;           /* Space between buttons */
+/*} */
+
+/* Style for the search bar */
+.header .search-bar {
+  flex-grow: 0;
+  margin-right: 2%;
+  text-align: center;
+  width: 200px;           /* Set a specific width to make it smaller */
+  padding: 5px 10px;      /* Adjust padding to reduce the size */
+  font-size: 14px;        /* Reduce the font size to make the text smaller */
+  text-align: center;
+  background-color:rgba(255, 255, 255, 0.249);
+}
+
+
+.header .search-bar input {
+  padding: 0px 0px;   /* Padding for the input field */
+  width: 100%;          /* Width of the search bar */
+  border: 0px transparent; /* Light border */
+  border-radius: 0px;  /* Rounded corners */
+  background-color: transparent;
+  font-size: 16px;     /* Font size for readability */
+}
+
+/* Style for the buttons */
+.header button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px; /* Button font size */
+}
+
+.header button:hover {
+  color: rgb(231, 252, 5); /* Hover effect color */
+}

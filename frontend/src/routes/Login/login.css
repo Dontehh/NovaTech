@@ -1,0 +1,134 @@
+/* Container for the login page */
+.login-container {
+  display: flex;
+  justify-content: center; /* Center the login card horizontally */
+  align-items: center;     /* Center the login card vertically */
+  height: 100vh;           /* Full viewport height */
+  background-color: #f4f4f4; /* Light background color */
+}
+
+/* Styling for the login card */
+.login-card {
+  background: white;
+  padding: 40px 60px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 550px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Header text for the login card */
+.login-header h1 {
+  font-size: 28px;
+  color: #333;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.login-header p {
+  font-size: 16px;
+  color: #666;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+/* Section for Outlook login button */
+.login-outlook {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+.login-outlook img {
+  width: 30px;
+  height: 30px;
+  align-items: center;
+}
+
+.login-outlook p {
+  font-size: 16px;
+  color: #0078d4;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  cursor: pointer;
+}
+
+/* Divider between Outlook and Email login */
+.login-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #aaa;
+}
+
+.login-divider span {
+  font-size: 14px;
+}
+
+/* Styling for the login form */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+/* Remember me and forgot password section */
+.login-options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.forgot-password {
+  color: #0078d4;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}
+
+/* Styling for the login button */
+.login-button {
+  background-color: #35b531;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 12px;
+  font-size: 18px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-button:hover {
+  background-color: #128f29;
+}

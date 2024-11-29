@@ -1,0 +1,71 @@
+.events {
+  margin-top: 1%;
+  padding: 0 3rem;
+}
+
+/* Container for all spots */
+.events-container {
+  margin-top: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adds space between cards */
+  justify-content: center; 
+}
+
+
+/* Individual card styling */
+.event-card {
+  width: 550px; /* Bootstrap standard card width */
+  height: 400px;
+  border-radius: 8px; /* Optional: Rounds card corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow */
+  overflow: hidden; /* Ensures content stays within card bounds */
+  margin-bottom: 3%;
+  background-size: cover;
+  background-position: center;
+  position: relative; /* For positioning the button */
+}
+
+/* Hover effect for card */
+.event-card:hover {
+  transform: scale(1.05); /* Slight zoom-in effect */
+}
+
+/* Button inside the card */
+.event-card .btn {
+  background-color: #1cc00d; /* Primary button color */
+  color: white;
+  text-align: center;
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Button hover effect */
+.event-card .btn:hover {
+  background-color: #067800; /* Darker shade on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .events-container {
+    padding: 0 1.5rem;
+    flex-direction: column;
+  }
+
+  .event-card {
+    max-width: 100%;
+    height: auto; /* Adjust height based on content */
+  }
+
+  .event-card .btn {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
