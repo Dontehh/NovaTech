@@ -1,0 +1,63 @@
+.teams-container {
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+.find-teams,
+.create-team {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+ul {
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove padding */
+}
+
+li {
+  display: flex;
+  justify-content: space-between; /* Space between team name and button */
+  padding: 10px 0; /* Space between list items */
+}
+
+.join-button {
+  background-color: #C2531A; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 5px 10px; /* Padding for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.join-button:hover {
+  background-color: #A03E14; /* Darker shade on hover */
+}
+
+input {
+  padding: 10px;
+  width: calc(100% - 22px); /* Full width minus padding */
+  margin-bottom: 10px; /* Space below input */
+  border: 1px solid #ccc; /* Border for input */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.action-button {
+  background-color: #C2531A; /* Button background color */
+  color: white; /* Button text color */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 20px; /* Padding for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.action-button:hover {
+  background-color: #A03E14; /* Darker shade on hover */
+} 
