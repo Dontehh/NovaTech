@@ -52,10 +52,10 @@ export const signup = async (userData: SignupData): Promise<void> => {
   const { error } = await supabase.from('users').insert([
     {
       email,
-      password, // Plain text password (not recommended for production)
+      password,
       username,
       name,
-      id, // Assuming 'id' is provided directly and you might want to remove this field if it's not meant to be used as a unique identifier
+      id, 
     },
   ]);
 

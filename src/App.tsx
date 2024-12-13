@@ -6,12 +6,14 @@ import { Signup } from './pages/Signup';
 import { Facilities } from './pages/Facilities';
 import { FacilityDetails } from './pages/FacilityDetails';
 import { Events } from './pages/Events';
+import Teams  from './pages/Teams';
 import { useAuthStore } from './store/authStore';
 import ForgotPass from './pages/forgot-pass';
 import ResetPassword from './pages/ResetPassword';
 import VerifyOTP from './pages/VerifyOTP';
 import Dashboard from './pages/Dashboard';
 import Homepage from './pages/Homepage';
+
 
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -39,6 +41,7 @@ function App() {
           <Route path="facilities" element={<Facilities />} />
           <Route path="facilities/:id" element={<FacilityDetails />} />
           <Route path="events" element={<Events />} />
+          <Route path="teams" element={<Teams />} />
         </Route>
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/verify-otp" element={<VerifyOTP />} />

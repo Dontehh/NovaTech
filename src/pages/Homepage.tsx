@@ -39,7 +39,7 @@ const Homepage: React.FC = () => {
             <img src="./src/pics/pool.jpeg" alt="Facilities" />
           </div>
           <div className="info-description">
-            <h3>• Facilities</h3>
+            <h4>• Facilities</h4>
             <p>Explore our state-of-the-art facilities designed to enhance your fitness journey. You can easily book one of our facilities, including:</p>
             <ul>
               <li>⠀• Soccer Field A</li>
@@ -57,7 +57,7 @@ const Homepage: React.FC = () => {
         </div>
         <div className="info-item">
           <div className="info-description">
-            <h4>• Events⠀</h4>
+            <h4>• Events</h4>
             <p>Join our exciting events and activities to stay motivated and engaged.</p>
             <Link to="/events">
               <button className="action-button">Explore more</button> {/* Button for Events */}
@@ -72,7 +72,7 @@ const Homepage: React.FC = () => {
             <img src="./src/pics/team.jpeg" alt="Teams" />
           </div>
           <div className="info-description">
-            <h3>• Teams</h3>
+            <h4>• Teams</h4>
             <p>Create or join a team to improve your journey.</p>
             <Link to="/teams">
               <button className="action-button">Find team</button> {/* Button for Teams */}
