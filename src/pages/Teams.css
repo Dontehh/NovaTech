@@ -17,6 +17,23 @@ h1 {
   background-color: #f9f9f9;
 }
 
+.create-team input {
+  width: 100%; /* Make the input take up the full width of the container */
+  padding: 10px 15px; /* Add padding for spacing inside the input */
+  margin-top: 10px; /* Add spacing above the input */
+  border: 1px solid #ccc; /* Soft border color */
+  border-radius: 5px; /* Rounded corners */
+  background-color: #fff; /* White background for clarity */
+  font-size: 16px; /* Increase font size for readability */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+}
+
+.create-team input:focus {
+  border-color: #007bff; /* Highlight the border on focus with a blue color */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add subtle shadow effect on focus */
+  outline: none; /* Remove default outline */
+}
+
 ul {
   list-style-type: none; /* Remove default list styling */
   padding: 0; /* Remove padding */
@@ -49,15 +66,17 @@ input {
   border-radius: 5px; /* Rounded corners */
 }
 
-.action-button {
-  background-color: #C2531A; /* Button background color */
-  color: white; /* Button text color */
-  border: none; /* Remove default border */
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 20px; /* Padding for the button */
-  cursor: pointer; /* Pointer cursor on hover */
+.create-team .action-button {
+  background-color: #C2531A;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  display: block; /* Make the button behave as a block-level element */
+  margin: 20px auto; /* Auto horizontal margin for centering */
 }
 
-.action-button:hover {
+.create-team .action-button:hover {
   background-color: #A03E14; /* Darker shade on hover */
 } 
