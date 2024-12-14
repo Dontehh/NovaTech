@@ -2,18 +2,17 @@ import React, { useState } from 'react';
 import { useEventStore } from '../store/eventStore';
 import { useAuthStore } from '../store/authStore';
 import { Calendar, Users, Clock, Plus } from 'lucide-react';
+import supabase from '../config/supabaseClient';
 import { format } from 'date-fns';
 import { TeamList } from '../components/TeamList';
-import { CreateTeamModal } from '../components/CreateTeamModal';
-//import { TeamSizeSelector } from '../components/TeamSizeSelector';
 
 export const Events: React.FC = () => {
   const events = useEventStore((state) => state.events);
+  const [showForm, setShowForm] = useState(false); // State to toggle the form
   const joinEvent = useEventStore((state) => state.joinEvent);
-  const user = useAuthStore((state) => state.user);
-  const [showCreateTeam, setShowCreateTeam] = useState(false);
-  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
-  const [showTeamSizeSelector, setShowTeamSizeSelector] = useState(false);
+  const { user } = useAuthStore(); // Access the user from Zustand store
+  const [teamName, setTeamName] = useState('');
+  const [description, setDescription] = useState('');
 
   const handleJoinEvent = (eventId: string) => {
     if (user) {
@@ -26,14 +25,42 @@ export const Events: React.FC = () => {
     }
   };
 
-  const handleCreateTeam = (eventId: string) => {
-    setSelectedEventId(eventId);
-    setShowTeamSizeSelector(true);
-  };
-
-  const handleTeamSizeSelected = (size: number) => {
-    setShowTeamSizeSelector(false);
-    setShowCreateTeam(true);
+  const handleCreateTeam = async (eventId: string) => {
+    if (teamName && user?.id) {
+      // Insert new team into Supabase
+      const { data, error } = await supabase
+        .from('teams')
+        .insert({
+          name: teamName,
+          description: description,
+          created_by: user.id, // Use user ID from Zustand store
+          event_id: eventId,
+        })
+        .select();
+  
+      if (error) {
+        console.error('Error creating team:', error);
+      } else if (data) {
+        // Assuming the newly created team is in data[0]
+        const teamId = data[0]?.id; 
+        // Insert the user into the team_members table
+        const { error: insertError } = await supabase
+          .from('team_members')
+          .insert({
+            userID: user.id, // Use user ID from Zustand store
+            teamID: teamId,   // Use the team ID from the newly created team
+          });
+  
+        if (insertError) {
+          console.error('Error adding user to team:', insertError);
+        } else {
+          alert('You have successfully created and joined the team!');
+          setTeamName(''); // Clear team name input
+          setDescription(''); // Clear description input
+          setShowForm(false); // Hide the form after creating the team
+        }
+      }
+    }  
   };
 
   return (
@@ -84,13 +111,40 @@ export const Events: React.FC = () => {
                       : 'Join Event'}
                   </button>
                   {!hasJoined && (
-                    <button
-                      onClick={() => handleCreateTeam(event.id)}
-                      className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
-                    >
-                      <Plus className="w-4 h-4 mr-1" />
-                      Create Team
-                    </button>
+                    <div>
+                      <button
+                        onClick={() => setShowForm(!showForm)} // Toggle the form visibility
+                        className="flex items-center justify-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      >
+                        <Plus className="w-4 h-4 mr-1" />
+                        Create Team
+                      </button>
+
+                      {showForm && (
+                        <div className="mt-4">
+                          <h2>Create New Team</h2>
+                          <input
+                            type="text"
+                            value={teamName}
+                            onChange={(e) => setTeamName(e.target.value)}
+                            placeholder="Enter team name"
+                            className="border p-2 rounded-md w-full mb-2"
+                          />
+                          <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Enter team description"
+                            className="border p-2 rounded-md w-full mb-2"
+                          />
+                          <button
+                            onClick={async () => await handleCreateTeam(event.id)}
+                            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+                          >
+                            Create Team
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   )}
                 </div>
 
@@ -100,24 +154,6 @@ export const Events: React.FC = () => {
           );
         })}
       </div>
-
-      {showTeamSizeSelector && selectedEventId && (
-        <TeamSizeSelector
-          eventId={selectedEventId}
-          onClose={() => setShowTeamSizeSelector(false)}
-          onSelect={handleTeamSizeSelected}
-        />
-      )}
-
-      {showCreateTeam && selectedEventId && (
-        <CreateTeamModal
-          eventId={selectedEventId}
-          onClose={() => {
-            setShowCreateTeam(false);
-            setSelectedEventId(null);
-          }}
-        />
-      )}
     </div>
   );
 };

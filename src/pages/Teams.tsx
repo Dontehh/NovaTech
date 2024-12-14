@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import supabase from '../config/supabaseClient';
 import './Teams.css';
-import { useAuthStore } from '../store/authStore'; // Adjust the path based on your project structure
+import { useAuthStore } from '../store/authStore';
 
 
 const Teams: React.FC = () => {

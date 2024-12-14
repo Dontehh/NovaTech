@@ -1,28 +1,123 @@
-import React from 'react';
-import { useTeamStore } from '../store/teamStore';
+import React, { useEffect, useState } from 'react';
 import { useAuthStore } from '../store/authStore';
-import { Users } from 'lucide-react';
+import supabase from '../config/supabaseClient';
 
 interface TeamListProps {
   eventId: string;
 }
 
 export const TeamList: React.FC<TeamListProps> = ({ eventId }) => {
-  const teams = useTeamStore((state) => state.teams.filter((t) => t.eventId === eventId));
+  const [teams, setTeams] = useState<any[]>([]); // State to store teams
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const user = useAuthStore((state) => state.user);
-  const { leaveTeam, joinTeam } = useTeamStore();
 
-  const handleLeaveTeam = (teamId: string) => {
-    if (user) {
-      leaveTeam(teamId, user.id);
+  // Fetch teams data from Supabase
+  useEffect(() => {
+    const fetchTeams = async () => {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('teams')
+        .select('id, name, number_members')
+        .eq('event_id', eventId);
+
+      if (error) {
+        setError(error.message);
+      } else {
+        setTeams(data || []);
+      }
+      setLoading(false);
+    };
+
+    fetchTeams();
+     // Set up real-time subscription to listen for changes in the `teams` table
+      const channel = supabase
+      .channel('custom-all-channel')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'teams' }, (payload) => {
+        console.log('Change received!', payload);
+
+        // Ensure correct types for each event
+        if (payload.eventType === 'INSERT' && payload.new) {
+          setTeams((prevTeams) => [...prevTeams, payload.new as { id: number; name: string; description?: string }]); // Add new team
+        } else if (payload.eventType === 'UPDATE' && payload.new) {
+          setTeams((prevTeams) =>
+            prevTeams.map((team) =>
+              team.id === (payload.new as { id: number }).id ? { ...team, ...payload.new } : team
+            )
+          ); // Update the team
+        } else if (payload.eventType === 'DELETE' && payload.old) {
+          setTeams((prevTeams) =>
+            prevTeams.filter((team) => team.id !== (payload.old as { id: number }).id)
+          ); // Remove deleted team
+        }
+      })
+      .subscribe();
+
+    // Cleanup subscription on component unmount
+    return () => {
+      channel.unsubscribe();
+    };
+
+  }, [eventId]);
+
+
+  
+  const handleJoinTeam = async (teamId: number) => {
+    if (user?.id) {
+      try {
+        // Fetch team details to check the creator
+        const { data: team, error: fetchError } = await supabase
+          .from('teams')
+          .select('created_by')
+          .eq('id', teamId)
+          .single();
+  
+        if (fetchError) {
+          console.error('Error fetching team details:', fetchError);
+          return;
+        }
+  
+        // Check if the user is the creator of the team
+        if (team?.created_by === user.id) {
+          alert('You cannot join a team that you created.');
+          return;
+        }
+  
+        // Add the user to the team
+        const { error: insertError } = await supabase
+          .from('team_members')
+          .insert({
+            userID: user.id, // Use user ID from Zustand store
+            teamID: teamId,
+          });
+  
+        if (insertError) {
+          console.error('Error joining team:', insertError);
+          alert('You are already part of that team!');
+        } else {
+          alert('You have joined the team!');
+          // Update the teams state to reflect the new membership
+          setTeams((prevTeams) =>
+          prevTeams.map((team) =>
+            team.id === teamId
+              ? { ...team, team_members: [...team.team_members, { userID: user.id }] }
+              : team
+          )
+        );
+        }
+      } catch (err) {
+        console.error('Unexpected error:', err);
+      }
     }
   };
 
-  const handleJoinTeam = (teamId: string) => {
-    if (user) {
-      joinTeam(teamId, user);
-    }
-  };
+  if (loading) {
+    return <p>Loading teams...</p>;
+  }
+
+  if (error) {
+    return <p className="text-red-600">{error}</p>;
+  }
 
   return (
     <div className="space-y-4">
@@ -38,43 +133,26 @@ export const TeamList: React.FC<TeamListProps> = ({ eventId }) => {
             >
               <div className="flex justify-between items-center mb-2">
                 <h4 className="font-medium text-gray-900">{team.name}</h4>
-                <div className="flex items-center text-gray-600">
-                  <Users className="w-4 h-4 mr-1" />
-                  <span>{team.members.length} members</span>
-                </div>
-              </div>
-              
-              <div className="mb-4">
-                <p className="text-sm text-gray-600">Members:</p>
-                <div className="flex flex-wrap gap-2 mt-1">
-                  {team.members.map((member) => (
-                    <span
-                      key={member.id}
-                      className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800"
-                    >
-                      {member.name}
-                    </span>
-                  ))}
-                </div>
+                <span className="text-gray-600">{team.number_members} members</span>
               </div>
 
               {user && (
                 <div className="flex justify-end">
-                  {team.members.some((m) => m.id === user.id) ? (
-                    <button
-                      onClick={() => handleLeaveTeam(team.id)}
-                      className="text-sm text-red-600 hover:text-red-700"
-                    >
-                      Leave Team
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => handleJoinTeam(team.id)}
-                      className="text-sm text-indigo-600 hover:text-indigo-700"
-                    >
-                      Join Team
-                    </button>
-                  )}
+                    {team.team_members?.some((m: any) => m.userID === user.id) ? (
+                      // If the user is already a member, hide the button
+                      <button
+                        disabled
+                        className="text-sm text-gray-400 cursor-not-allowed"
+                      >
+                        Already a Member
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleJoinTeam(team.id)}
+                        className="text-sm text-indigo-600 hover:text-indigo-700"
+                      >
+                        Join Team
+                      </button>)}
                 </div>
               )}
             </div>
@@ -84,3 +162,4 @@ export const TeamList: React.FC<TeamListProps> = ({ eventId }) => {
     </div>
   );
 };
+
